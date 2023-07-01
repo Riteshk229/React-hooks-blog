@@ -13,6 +13,39 @@ const PostSubTitlte = styled.p`
     font-size: 13px;
 `;
 
+const Post = styled.div`
+    border: 1px solid #e1e1e1;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+
+
+
+    h3{
+        margin: 0;
+        padding: 0;
+        font-size: 25px;
+        font-weight: bold;
+        color: black;
+    }
+
+    &:hover{
+        border : 1px solid #2196f3;
+    }
+
+    h3:hover {
+        color: #2196f3;
+      }
+
+    a {
+        text-decoration: none;
+      }
+
+      @media (max-width: 800px){
+        border: 1px solid black;
+      }
+`;
+
 function Home(){
     const [posts,setPosts] = useState([]);
 
@@ -41,12 +74,12 @@ function Home(){
             {/* <button className="createPostBtn">This is a button</button> */}
             <div id="blog-by">Ritesh</div>
             {posts.map((post,index) => (
-                <div className="post" key={`post-${index}`}>
+                <Post className="p" key={`post-${index}`}>
                     <Link to={`/post/${post.id}`}>
                         <h3>{post.title}</h3>
                     </Link>
                     <PostSubTitlte>{post.subTitle}</PostSubTitlte>
-                </div>
+                </Post>
             ))}
         </div>
     )

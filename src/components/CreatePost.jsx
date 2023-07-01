@@ -1,7 +1,26 @@
 import { useState } from "react";
 import {firestore} from '../firebase';
 import { useFormInput } from "../hooks";
-import classes from '../assets/CSS/button.module.css';
+import styled ,{css}from 'styled-components';
+
+
+// dynamic styling
+const StyledButton = styled.button`
+    height: 33px;
+    background: ${(props)=> props.primary ? "#4caf50" : "blue"};
+    border: 0;
+    color: #fff;
+    padding: 8px;
+    font-size: 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    ${(props) => props.primary && css`
+        border : 1px solid ${props.bgColor};
+    `};
+`;
+
+// module css styling
+// import classes from '../assets/CSS/button.module.css';
 
 
 function CreatePost(){
@@ -43,7 +62,8 @@ function CreatePost(){
                     <textarea required {...content}></textarea>
                     {/* <textarea required value={content.value} onChange={content.onChange}></textarea> */}
                 </div>
-                <button className={classes.createPostBtn}>Create Post</button>
+                <StyledButton primary bgColor='blue'>Create Post</StyledButton>
+                {/* <StyledButton>Create Post</StyledButton> */}
             </form>
         </div>
     )

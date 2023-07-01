@@ -1,17 +1,26 @@
 import { useState } from "react";
+import {firestore} from '../firebase';
+import { useFormInput } from "../hooks";
 
 
 function CreatePost(){
 
-    const [title,setTitle] = useState();
-    const [subTitle,setSubTitle] = useState();
-    const [content,setContent] = useState();
+    const title = useFormInput('');
+    const subTitle = useFormInput('');
+    const content= useFormInput('');
 
     function handleSubmit(e){
         e.preventDefault();
         console.log("Title : ",title);
         console.log("Sub Title : ",subTitle);
         console.log("Content : ",content);
+
+        firestore.collection('posts').add({
+            title    : title.value,
+            subTitle : subTitle.value,
+            content  : content.value,
+            createdAt : new Date()
+        })
     }
 
     return (
@@ -20,15 +29,18 @@ function CreatePost(){
             <form onSubmit={handleSubmit}>
                 <div className="form-field">
                     <label>Title</label>
-                    <input value={title} onChange={(e)=> setTitle(e.target.value)}></input>
+                    <input required {...title}></input>
+                    {/* <input required value={title.value} onChange={title.onChange}></input> */}
                 </div>
                 <div className="form-field">
                     <label>Sub Title</label>
-                    <input value={subTitle} onChange={(e)=> setSubTitle(e.target.value)}></input>
+                    <input required {...subTitle}></input>
+                    {/* <input required value={subTitle.value} onChange={subTitle.onChange}></input> */}
                 </div>
                 <div className="form-field">
                     <label>Content</label>
-                    <textarea value={content} onChange={(e)=> setContent(e.target.value)}></textarea>
+                    <textarea required {...content}></textarea>
+                    {/* <textarea required value={content.value} onChange={content.onChange}></textarea> */}
                 </div>
                 <button className="create-post-btn">Create Post</button>
             </form>

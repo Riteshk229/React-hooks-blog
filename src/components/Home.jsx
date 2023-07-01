@@ -26,6 +26,7 @@ function Home(){
     return (
         <div className="home">
             <h1 style={styles.heading}> Tech Blog </h1>
+            <button className="createPostBtn">This is a button</button>
             <div id="blog-by">Ritesh</div>
             {posts.map((post,index) => (
                 <div className="post" key={`post-${index}`}>

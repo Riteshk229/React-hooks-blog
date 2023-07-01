@@ -8,6 +8,7 @@ function Home(){
     useEffect(()=>{
         firestore
             .collection('posts')
+            .orderBy("createdAt",'desc')
             .get()
             .then((Snapshot) => {
                 const posts =Snapshot.docs.map((doc) =>{
@@ -24,7 +25,7 @@ function Home(){
     },[]);
     return (
         <div className="home">
-            <h1> Tech Blog </h1>
+            <h1 style={styles.heading}> Tech Blog </h1>
             <div id="blog-by">Ritesh</div>
             {posts.map((post,index) => (
                 <div className="post" key={`post-${index}`}>
@@ -38,3 +39,12 @@ function Home(){
     )
 }
 export default Home;
+
+
+// Inline Styling 
+const styles = {
+    heading: {
+        marginTop : 30,
+        fontSize : 56
+    },
+}
